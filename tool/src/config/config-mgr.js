@@ -1,5 +1,5 @@
-import { pkgUpSync } from "pkg-up";
-import { readFileSync } from "fs";
+// import { pkgUpSync } from "pkg-up";
+// import { readFileSync } from "fs";
 import { cosmiconfigSync } from "cosmiconfig";
 const configLoader = cosmiconfigSync("tool");
 import schema from './schema.json' assert { type: "json" };
