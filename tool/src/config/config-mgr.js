@@ -1,8 +1,10 @@
 // import { pkgUpSync } from "pkg-up";
 // import { readFileSync } from "fs";
+import chalk from 'chalk';
 import { cosmiconfigSync } from "cosmiconfig";
 const configLoader = cosmiconfigSync("tool");
 import schema from './schema.json' assert { type: "json" };
+import betterAjvErrors from "better-ajv-errors";
 import Ajv from 'ajv';
 const ajv = new Ajv();
 
@@ -15,7 +17,8 @@ export function getConfig() {
     const isValid = ajv.validate(schema, result.config);
     if (!isValid) {
       console.log(chalk.yellow('Invalid configuration was supplied'));
-      console.log(ajv.errors);
+      console.log();
+      console.log(betterAjvErrors(schema, result.config, ajv.errors));
       process.exit(1);
     }
     console.log("Found configuration", result.config);
